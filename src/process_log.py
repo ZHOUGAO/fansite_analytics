@@ -42,12 +42,9 @@ def create_dict(file_name):
     #create variables for in 20 second log attempt and the dictionary for the blocks of different IP
     attempt_fail_1st_time = 0
     attempt_fail_2nd_time = 0
-    #attempt_fail_3rd_time = 0
-    block_time = 0
-    #attempt_dict = {}
     attempt_list = [] #use list other than set for the time order
-    blocked_dict = {}
-    pre_block = {}
+    blocked_dict = {} #create a dictionary to a block event
+    pre_block = {} #create a dictionary to store first and/or second attempt
     
     for n in range(len(lines)):
         line = lines[n]
@@ -57,7 +54,6 @@ def create_dict(file_name):
         ipName = temp[0]
         
         #Convert time string with Time Zone to time stamps
-     
         localTime = temp[3].lstrip('[')
         tZone = temp[4].rstrip(']')
     
@@ -224,7 +220,7 @@ def writeout_blocks(attempt_list, output_file):
     file_out.close()
 
 
-## A function to collect file names from the input arguments
+## Function to collect file names from the input arguments
 def get_file_names():
     if len(sys.argv) != 6:
         print "please type in the names of all the 5 necessary files following the current python file"
@@ -234,6 +230,7 @@ def get_file_names():
 
 
 if __name__ == "__main__":
+    
     #get the necessary file names from arugument
     file_list = get_file_names()
     log_file = file_list[1]
